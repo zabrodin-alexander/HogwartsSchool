@@ -4,6 +4,8 @@ import com.hogwarts.school.model.Student;
 import com.hogwarts.school.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 @Service
 public class StudentService {
     private final StudentRepository studentRepository;
@@ -26,6 +28,10 @@ public class StudentService {
 
     public void deleteStident(long id) {
         studentRepository.deleteById(id);
+    }
+
+    public Collection<Student> getAllStudent() {
+        return studentRepository.findAll();
     }
 }
 

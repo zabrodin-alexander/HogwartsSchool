@@ -3,8 +3,11 @@ package com.hogwarts.school.controller;
 
 import com.hogwarts.school.model.Student;
 import com.hogwarts.school.service.StudentService;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/student")
@@ -38,5 +41,10 @@ public class StudentController {
     public ResponseEntity deleteStudent(@PathVariable long id) {
         studentService.deleteStident(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public Collection<Student> getAllStudent() {
+        return studentService.getAllStudent();
     }
 }
