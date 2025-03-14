@@ -3,7 +3,6 @@ package com.hogwarts.school.controller;
 
 import com.hogwarts.school.model.Student;
 import com.hogwarts.school.service.StudentService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
