@@ -9,6 +9,7 @@ import java.util.Collection;
 
 @Service
 public class FacultyService {
+
     private final FacultyRepository facultyRepository;
 
     public FacultyService(FacultyRepository facultyRepository) {
@@ -38,12 +39,9 @@ public class FacultyService {
     public Collection<Faculty> findFacultyByNameIgnoreCaseOrColorIgnoreCase(String name, String color) {
         return facultyRepository.findFacultyByNameIgnoreCaseOrColorIgnoreCase(name, color);
     }
-
-    public Faculty getFacultyByStudentId(Long id) {
-        return facultyRepository.getFacultyByStudentId(id);
-
+    public Faculty getFacultyByStudentId(Long faculty) {
+        return facultyRepository.getFacultyByStudentId(faculty);
     }
-
 
 }
 
