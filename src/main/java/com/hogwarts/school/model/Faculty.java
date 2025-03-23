@@ -2,7 +2,6 @@ package com.hogwarts.school.model;
 
 import jakarta.persistence.*;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,17 +13,14 @@ public class Faculty {
     private String name;
     private String color;
 
-    @OneToMany(mappedBy = "faculty", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "faculty_Id", fetch = FetchType.LAZY)
     private List<Student> students;
 
-
-    public Faculty(Long id, String name, String color) {
+    public Faculty(Long id, String name, String color, List<Student> students) {
         this.id = id;
         this.name = name;
         this.color = color;
-    }
-
-    public Faculty() {
+        this.students = students;
     }
 
     public Long getId() {
@@ -70,6 +66,7 @@ public class Faculty {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", color='" + color + '\'' +
+                ", students=" + students +
                 '}';
     }
 }

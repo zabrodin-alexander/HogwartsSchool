@@ -43,15 +43,8 @@ public class StudentService {
     public void deletAllStudent() {
         studentRepository.deleteAll();
     }
-
-
-    public Faculty getFacultyByStudentId(Long studentId) {
-        return studentRepository.getFacultyByStudentId(studentId);
-
-    }
-
-    public List<Student> getStudentsByFacultyId(Long facultyId) {
-        return studentRepository.getStudentsByFacultyId(facultyId);
+    public List<Student> getStudentsByFacultyId(Long id) {
+        return studentRepository.getStudentsByFacultyId(id);
     }
 }
 

@@ -1,7 +1,7 @@
 
 package com.hogwarts.school.controller;
 
-import com.hogwarts.school.model.Faculty;
+
 import com.hogwarts.school.model.Student;
 import com.hogwarts.school.service.StudentService;
 import org.springframework.http.ResponseEntity;
@@ -59,12 +59,8 @@ public class StudentController {
         studentService.deletAllStudent();
     }
 
-    @GetMapping("/{studentId}/faculty")
-    public Faculty getFacultyByStudentId(@PathVariable Long studentId){
-        return studentService.getFacultyByStudentId(studentId);
-    }
     @GetMapping("/faculty/{facultyId}")
-    public List<Student> getStudentsByFacultyId(@PathVariable Long facultyId) {
-        return studentService.getStudentsByFacultyId(facultyId);
+    public List<Student> getStudentsByFacultyId(@PathVariable Long id) {
+        return studentService.getStudentsByFacultyId(id);
     }
 }
