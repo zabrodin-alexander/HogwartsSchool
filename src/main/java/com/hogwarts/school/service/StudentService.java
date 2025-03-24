@@ -1,6 +1,5 @@
 package com.hogwarts.school.service;
 
-import com.hogwarts.school.model.Faculty;
 import com.hogwarts.school.model.Student;
 import com.hogwarts.school.repository.StudentRepository;
 import org.springframework.stereotype.Service;
@@ -44,8 +43,8 @@ public class StudentService {
         studentRepository.deleteAll();
     }
 
-    public List<Student> getStudentsByFacultyId(Long faculty_Id) {
-        return studentRepository.getStudentsByFacultyId(faculty_Id);
+    public List<Student> findStudentsByFacultyId(Long faculty_Id) {
+        return studentRepository.findStudentsByFacultyId(faculty_Id);
     }
 
 
