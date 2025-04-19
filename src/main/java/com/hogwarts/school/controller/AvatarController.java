@@ -14,26 +14,12 @@ import java.io.IOException;
 @RestController
 public class AvatarController {
 
-    private AvatarService avatarService;
+    private final AvatarService avatarService;
 
-    /**
-     * Метод получает POST запрос с фото студента по адресу типа students/1/avatar
-     * Берёт ID студента из URL (например, 1).
-     * Берёт файл (аватар), который отправил пользователь.
-     * Передаёт их в сервис для сохранения.
-     * Отправляет ответ 200 OK, если всё прошло успешно
-     *
-     * Пример из жизни:
-     * Представь, что это как отправка фото в профиль ВКонтакте:
-     * Ты заходишь в настройки, выбираешь фото.
-     * Нажимаешь «Сохранить».
-     * Сервер говорит: «Фото загружено!
-     * Вот этот метод как раз и делает пункт 3 — принимает фото и сохраняет его.
-     * @param studentId
-     * @param avatar
-     * @return возвращает, что все прошло успешно.
-     * @throws IOException
-     */
+    public AvatarController(AvatarService avatarService) {
+        this.avatarService = avatarService;
+    }
+
     @PostMapping(value = "/{studentId}/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     //"/{studentId}/avatar" — URL, по которому можно отправить аватар.
     //Например: http://Сайт/students/1/avatar (где 1 — studentId).

@@ -55,9 +55,9 @@ public class FacultyController {
                                                                             @RequestParam(required = false) String color) {
         return facultyService.findFacultyByNameIgnoreCaseOrColorIgnoreCase(name, color);
     }
-    @GetMapping("/{studentId}/faculty")
-    public Faculty findFacultyByStudent(@RequestParam List<Student>students) {
-        return facultyService.findFacultyByStudents(students);
+    @GetMapping("/student/{studentId}")
+    public Faculty findFacultyByStudent(@PathVariable Long studentId) {
+        return facultyService.findFacultyByStudentId(studentId);
     }
 }
 
