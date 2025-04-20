@@ -30,7 +30,7 @@ public class FacultyController {
     }
 
     @PostMapping
-    public Faculty addFaculty(@PathVariable Faculty faculty) {
+    public Faculty addFaculty(@RequestBody Faculty faculty) {
         return facultyService.addFaculty(faculty);
     }
 

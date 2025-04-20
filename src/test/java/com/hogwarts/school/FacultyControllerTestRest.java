@@ -39,7 +39,7 @@ public class FacultyControllerTestRest {
     }
 
     @Test
-    public void testPosrFaculty() throws Exception {
+    public void testPostFaculty() throws Exception {
         Faculty faculty = new Faculty();
         faculty.setId(333L);
         faculty.setName("Petrovs");
