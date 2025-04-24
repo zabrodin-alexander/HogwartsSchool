@@ -33,18 +33,12 @@ public class AvatarService {
         this.avatarRepository = avatarRepository;
     }
 
-    /**
-     * Метод сохраняет аватар (фотографию) студента в файловую систему и в базу данных.
-     *
-     * @param studentId
-     * @param avatarFile
-     * @throws IOException
-     */
+
     public void uploadAvatar(Long studentId, MultipartFile avatarFile) throws IOException {
         //Получение студента, берёт из базы данных студента с указанным studentId.
-        Student student = studentRepository.getById(studentId);
+        Student student = studentRepository.findByIdWithFaculty(studentId).orElse(null);
         //Получение студента, берёт из базы данных студента с указанным studentId.
-        Path filePath = Path.of(avatarsDir, student + "." + getExtension(avatarFile.getOriginalFilename()));
+        Path filePath = Path.of(avatarsDir, student.getName() + "." + getExtension(avatarFile.getOriginalFilename()));
         //Path. Это интерфейс. В нем будем хранить путь до директории с загружаемыми файлами.
         //avatarsDir — папка, куда сохраняются аватары. student + "." + расширение
         //getExtensions() — вытаскивает расширение файла (.jpg, .png).
@@ -80,7 +74,6 @@ public class AvatarService {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
         //substring() вырезает часть строки от указанной позиции до конца
         //lastIndexOf(".") ищет последнюю точку в имени файла. + 1 нужно, чтобы пропустить саму точк
-
     }
 }
 
