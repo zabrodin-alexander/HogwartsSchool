@@ -5,6 +5,8 @@ import com.hogwarts.school.model.Student;
 import com.hogwarts.school.repository.AvatarRepository;
 import com.hogwarts.school.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,9 +21,6 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 @Transactional
 public class AvatarService {
 
-    /**
-     * В переменную avatarsDir будет автоматически подставлено значение avatar.
-     */
     @Value("${avatars.dir.path}")//Надпись, что в переменной avatarsDir будет значение "avatar".
     private String avatarsDir; // Сама переменная куда это значение попадет.
 
@@ -39,10 +38,6 @@ public class AvatarService {
         Student student = studentRepository.findByIdWithFaculty(studentId).orElse(null);
         //Получение студента, берёт из базы данных студента с указанным studentId.
         Path filePath = Path.of(avatarsDir, student.getName() + "." + getExtension(avatarFile.getOriginalFilename()));
-        //Path. Это интерфейс. В нем будем хранить путь до директории с загружаемыми файлами.
-        //avatarsDir — папка, куда сохраняются аватары. student + "." + расширение
-        //getExtensions() — вытаскивает расширение файла (.jpg, .png).
-        //«Сохрани файл в папку /uploads/avatars под именем Иван Иванов.jpg»
 
         // Подготовка папки и удаление старого файла
         Files.createDirectories(filePath.getParent()); // Создаёт папки, если их нет
@@ -57,9 +52,7 @@ public class AvatarService {
             bis.transferTo(bos); // Копирует файл из входящего потока в новый файл
         } //try-with-resources - способ работы который автоматически закрывает их после использования (даже если произошла ошибка).
 
-        //Сохранение информации о файле в базу данных
-        //Avatar — это сущность в базе данных, которая хранит Ссылку на студента.
-        //Путь к файлу. Размер, тип и (опционально) содержимое файла.
+
         Avatar avatar = avatarRepository.findByStudentId(studentId).orElseGet(Avatar::new); // Находит или создаёт новый аватар
         avatar.setStudent(student); // Привязывает к студенту
         avatar.setFilePath(filePath.toString()); // Путь к файлу (например, "/uploads/avatars/Иван Иванов.jpg")
@@ -75,6 +68,12 @@ public class AvatarService {
         //substring() вырезает часть строки от указанной позиции до конца
         //lastIndexOf(".") ищет последнюю точку в имени файла. + 1 нужно, чтобы пропустить саму точк
     }
+
+    public Page<Avatar> findAll(Pageable pageable) {
+        return avatarRepository.findAll(pageable);
+
+    }
+
 }
 
 

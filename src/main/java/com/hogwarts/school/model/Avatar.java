@@ -11,22 +11,16 @@ public class Avatar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * Оригинла будет хранится на жестком диске.
-     */
+
     private String filePath;
     private long fileSize;
     private String mediaType;
 
-    /**
-     * Всю информацию будем хранить в БД
-     */
+
     @Lob
     private byte[] data;
 
-    /**
-     * У студента может быть только одна аватарка.
-     */
+
     @OneToOne
     private Student student;
 
