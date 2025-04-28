@@ -6,6 +6,7 @@ import com.hogwarts.school.repository.AvatarRepository;
 import com.hogwarts.school.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
@@ -69,8 +71,9 @@ public class AvatarService {
         //lastIndexOf(".") ищет последнюю точку в имени файла. + 1 нужно, чтобы пропустить саму точк
     }
 
-    public Page<Avatar> findAll(Pageable pageable) {
-        return avatarRepository.findAll(pageable);
+    public List<Avatar> findAll(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page-1, size);
+        return avatarRepository.findAll();
 
     }
 

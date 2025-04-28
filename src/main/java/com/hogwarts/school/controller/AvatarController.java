@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 public class AvatarController {
@@ -30,8 +31,8 @@ public class AvatarController {
     }
 
     @GetMapping("/page")
-    public Page<Avatar> findAll(Pageable pageable) {
-        return avatarService.findAll(pageable);
+    public List<Avatar> findAll(@RequestParam int page, @RequestParam int size) {
+        return avatarService.findAll(page, size);
     }
 
 }
